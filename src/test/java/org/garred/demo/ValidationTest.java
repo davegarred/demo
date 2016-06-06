@@ -15,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:test-validation-config.xml")
+@ContextConfiguration(locations = {"classpath:spring/validation-config.xml", "classpath:spring/persistence-config.xml"})
 public class ValidationTest {
 
     @Autowired

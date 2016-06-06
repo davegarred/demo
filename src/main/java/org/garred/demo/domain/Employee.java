@@ -5,6 +5,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.garred.demo.validation.UniqueName;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,7 +14,7 @@ public class Employee {
 
 	@NotNull
 	@Size(max = 12)
-//	@UniqueName
+	@UniqueName
 	public final String name;
 	
 	@Min(18)

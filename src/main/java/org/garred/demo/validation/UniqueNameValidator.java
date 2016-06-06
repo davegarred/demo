@@ -5,13 +5,15 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.garred.demo.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UniqueNameValidator implements ConstraintValidator<UniqueName,String> {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
-    @Override
+
+	@Override
     public void initialize(UniqueName constraintAnnotation) {
     }
 

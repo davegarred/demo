@@ -13,8 +13,6 @@
 	<bean class="org.garred.demo.DemoController" 
 		c:employeeRepository-ref="employeeRepository"/> 
 		
-	
-	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
  
 </beans>

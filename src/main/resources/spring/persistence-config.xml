@@ -9,8 +9,10 @@
 
 	<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
 		<property name="dataSource" ref="dataSource" />
-		<property name="locations" value="classpath:migrations,classpath:org.garred.demo.migrations" />
+		<property name="locations" value="classpath:migrations" />
 	</bean>
+	
+	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.h2.Driver" />
@@ -18,10 +20,6 @@
 		<property name="username" value="sa" />
 		<property name="password" value="" />
 	</bean>
-
-	<bean id="employeeRepository" class="org.garred.demo.EmployeeRepository" 
-		c:dataSource-ref="dataSource"/>
-
 
 <!-- 
 	jdbc:h2:mem:demo;DB_CLOSE_DELAY=-1

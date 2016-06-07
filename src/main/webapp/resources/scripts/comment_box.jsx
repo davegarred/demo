@@ -5,6 +5,7 @@ var CommentBox = React.createClass({
         dataType: 'json',
         cache: false,
         success: function(data) {
+//            debugger;
           this.setState({data: data});
         }.bind(this),
         error: function(xhr,status,err) {
@@ -23,8 +24,9 @@ var CommentBox = React.createClass({
       $.ajax({
         url: this.props.url,
         dataType: 'json',
-        type: 'POST',
-        data: comment,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(comment),
         success: function(data) {
           this.setState({data: data});
         }.bind(this),
@@ -37,8 +39,8 @@ var CommentBox = React.createClass({
       return (
         <div className="commentBox">
           <h1>Comments</h1>
-          <CommentList data={this.state.data} />
           <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+          <CommentList data={this.state.data} />
         </div>
       )
     }
@@ -46,34 +48,29 @@ var CommentBox = React.createClass({
 
 var CommentForm = React.createClass({
     getInitialState: function() {
-      return {author: '', text: ''};
+      return {name: '', age: ''};
     },
-    handleAuthorChange: function(e) {
-      this.setState({author: e.target.value});
+    handleNameChange: function(e) {
+      this.setState({name: e.target.value});
     },
-    handleTextChange: function(e) {
-      this.setState({text: e.target.value});
+    handleAgeChange: function(e) {
+      this.setState({age: e.target.value});
     },
     handleSubmit: function(e) {
       e.preventDefault();
       this.props.onCommentSubmit(this.state);
-      this.setState({author: '', text: ''});
+      this.setState({name: '', age: ''});
     },
     render: function () {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="name" value={this.state.author} onChange={this.handleAuthorChange} />
-        <input type="text" placeholder="a comment..." value={this.state.text} onChange={this.handleTextChange}  />
-        <input type="submit" placeholder="Post"/>
+        <input type="text" placeholder="name" value={this.state.name} onChange={this.handleNameChange} />
+        <input type="text" placeholder="age" value={this.state.age} onChange={this.handleAgeChange}  />
+        <input type="submit" placeholder="Put"/>
       </form>
     )
   }
 });
-
-var data = [
-    {id: 1, author: "Author A", text: "This is one comment"},
-    {id: 2, author: "Author B", text: "This is a second comment"}
-];
 
 ReactDOM.render(
   <CommentBox url="../data" pollInterval={2000} />,

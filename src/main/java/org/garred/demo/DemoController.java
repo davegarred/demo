@@ -1,5 +1,6 @@
 package org.garred.demo;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
@@ -26,7 +27,7 @@ public class DemoController {
 		return this.employeeRepository.findAll();
 	}
 
-	@RequestMapping(value = "/add", method = PUT)
+	@RequestMapping(value = "/data", method = PUT, consumes = APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Object addEmployee(@RequestBody @Valid Employee employee) {
 		this.employeeRepository.insert(employee);

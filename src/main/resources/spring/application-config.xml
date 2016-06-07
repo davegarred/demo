@@ -10,7 +10,4 @@
  
  	<import resource="persistence-config.xml"/>
 
-	<bean id="employeeRepository" class="org.garred.demo.EmployeeRepository" 
-		c:dataSource-ref="dataSource"/>
-
 </beans>

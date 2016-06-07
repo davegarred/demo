@@ -16,16 +16,18 @@ public class V2_2__InsertAge implements JdbcMigration {
 	
 	@Override
 	public void migrate(Connection connection) throws Exception {
-		CallableStatement initialStatement = connection.prepareCall("SELECT name, data from demo.employee");
-		ResultSet rs = initialStatement.executeQuery();
-		while(rs.next()) {
-			Employee employee = objectMapper.readValue(rs.getAsciiStream("data"), Employee.class);
-			PreparedStatement statement = connection.prepareStatement("UPDATE demo.employee SET age=?");
-			statement.setInt(1, employee.age);
-			statement.execute();
-			statement.close();
+		try (CallableStatement initialStatement = connection.prepareCall("SELECT name, data from demo.employee")) {
+		    try (ResultSet rs = initialStatement.executeQuery()) {
+		        while(rs.next()) {
+		            final Employee employee = objectMapper.readValue(rs.getAsciiStream("data"), Employee.class);
+		            try (PreparedStatement statement = connection.prepareStatement("UPDATE demo.employee SET age=? WHERE name=?")) {
+		                statement.setInt(1, employee.age);
+		                statement.setString(2, employee.name);
+		                statement.execute();
+		            }
+		        }
+		    }
 		}
-		initialStatement.close();
 	}
 
 }

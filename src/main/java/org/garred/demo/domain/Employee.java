@@ -17,9 +17,11 @@ public class Employee {
 	@UniqueName
 	public final String name;
 	
-	@Min(18)
-	@Max(65)
+	@Min(18) @Max(65)
 	public final int age;
+	
+	
+	
 	
 	@JsonCreator
 	public Employee(@JsonProperty("name") String name, @JsonProperty("age") int age) {

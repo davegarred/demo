@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 @Controller
 public class DemoController {
 
@@ -24,13 +22,13 @@ public class DemoController {
 
 	@RequestMapping(value = "/data", method = GET)
 	@ResponseBody
-	public Object allEmployees() throws JsonProcessingException {
+	public Object allEmployees() {
 		return this.employeeRepository.findAll();
 	}
 
 	@RequestMapping(value = "/add", method = PUT)
 	@ResponseBody
-	public Object addEmployee(@RequestBody @Valid Employee employee) throws JsonProcessingException {
+	public Object addEmployee(@RequestBody @Valid Employee employee) {
 		this.employeeRepository.insert(employee);
 		return this.employeeRepository.findAll();
 	}

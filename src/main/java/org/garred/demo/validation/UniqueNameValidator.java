@@ -22,7 +22,7 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName,Strin
         if(name == null) {
             return true;
         }
-        if(this.employeeRepository.find(name) == null) {
+        if(this.employeeRepository.findByName(name) == null) {
         	return true;
         }
         return false;

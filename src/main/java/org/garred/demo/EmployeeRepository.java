@@ -49,7 +49,7 @@ public class EmployeeRepository {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	public Employee find(String name) {
+	public Employee findByName(String name) {
 		return this.jdbcTemplate.query(findOneStatement(name), resultSetExtractor);
 	}
 

@@ -30,11 +30,26 @@ public class ValidationTest {
 
 	@Test
 	public void testNameTooLong() {
-		Employee employee = new Employee("a name that is too long", 18);
+		Employee employee = new Employee("this is a name that is too long", 18);
 		Set<ConstraintViolation<Employee>> result = validator.validate(employee);
-		assertEquals(1, result.size());
-		
-		ConstraintViolation<Employee> violation = result.iterator().next();
-		assertEquals("name", violation.getPropertyPath().toString());
+		assertSingleViolation(result, "name", "size must be between 0 and 12");
 	}
+
+	@Test
+	public void testAgeTooYoung() {
+		Employee employee = new Employee("George", 17);
+		Set<ConstraintViolation<Employee>> result = validator.validate(employee);
+		assertSingleViolation(result, "age", "must be greater than or equal to 18");
+	}
+	
+	
+
+	private static void assertSingleViolation(Set<ConstraintViolation<Employee>> result, String path, String message) {
+		assertEquals(1, result.size());
+		ConstraintViolation<Employee> violation = result.iterator().next();
+		
+		assertEquals(path, violation.getPropertyPath().toString());
+		assertEquals(message, violation.getMessage());
+	}
+
 }

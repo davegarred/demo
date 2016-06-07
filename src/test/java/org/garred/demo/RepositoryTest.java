@@ -20,7 +20,7 @@ public class RepositoryTest {
     
 	@Test
 	public void testFindOne() {
-		Employee joe = repository.find("Joe");
+		Employee joe = repository.findByName("Joe");
 		assertEquals("Joe", joe.name);
 		assertEquals(36, joe.age);
 	}
@@ -36,7 +36,7 @@ public class RepositoryTest {
 		employees = repository.findAll();
 		assertEquals(2, employees.size());
 
-		Employee ally = repository.find("Ally");
+		Employee ally = repository.findByName("Ally");
 		assertEquals("Ally", ally.name);
 		assertEquals(18, ally.age);
 	}

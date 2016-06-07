@@ -6,3 +6,7 @@ CREATE TABLE demo.employee (
 );
 
 INSERT INTO demo.employee(name, data) VALUES ('Joe', '{ "name" : "Joe", "age" : 36 }');
+
+
+-- rollback
+-- DROP SCHEMA demo;
